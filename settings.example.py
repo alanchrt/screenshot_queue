@@ -2,4 +2,7 @@
 RABBITMQ_HOST = 'localhost'
 
 # The CutyCapt command to execute
-CUTYCAPT_COMMAND = 'xvfb-run --server-args="-screen 0, 1024x768x24" cutycapt'
+CUTYCAPT_COMMAND = 'cutycapt'
+
+# The xvfb-run command to execute
+XVFBRUN_COMMAND = 'xvfb-run'
