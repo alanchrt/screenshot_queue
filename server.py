@@ -1,9 +1,9 @@
 """
-rabbitmqtpy server
-====================
+screenshot_queue server
+=======================
 
-The rabbitmqtpy server connects to a RabbitMQ queue to listen for requests to
-generate website screenshots.
+The screenshot_queue server connects to a RabbitMQ queue to listen for requests
+to generate website screenshots.
 
 """
 
