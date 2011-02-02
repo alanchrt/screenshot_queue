@@ -2,7 +2,7 @@
 screenshot_queue server
 =======================
 
-Runs the screenshot_queue consumer as a daemon.
+The screenshot_queue server runs the screenshot_queue consumer as a daemon.
 
 Usage (xvfb optional)
 ---------------------
