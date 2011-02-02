@@ -8,9 +8,11 @@ to generate website screenshots.
 """
 
 import os
-import pika
+from pika import (AsyncoreConnection, ConnectionParameters, PlainCredentials,
+                  asyncore_loop)
 from webkit2png import WebkitRenderer, init_qtgui
-from settings import RABBITMQ_HOST, RABBITMQ_QUEUE, SCREENSHOT_ROOT
+from settings import (RABBITMQ_HOST, RABBITMQ_USERNAME, RABBITMQ_PASSWORD,
+                      RABBITMQ_QUEUE, SCREENSHOT_ROOT)
 
 # Initialize a QApplication
 application = init_qtgui()
@@ -29,8 +31,8 @@ def capture_screenshot(ch, method, properties, body):
     image.close()
 
 # Open RabbitMQ connection
-connection = pika.AsyncoreConnection(pika.ConnectionParameters(
-        host=RABBITMQ_HOST))
+connection = AsyncoreConnection(ConnectionParameters(host=RABBITMQ_HOST,
+    credentials=PlainCredentials(RABBITMQ_USERNAME, RABBITMQ_PASSWORD)))
 channel = connection.channel()
 
 # Declare the queue
@@ -40,4 +42,4 @@ channel.queue_declare(queue=RABBITMQ_QUEUE)
 channel.basic_consume(capture_screenshot, queue=RABBITMQ_QUEUE, no_ack=True)
 
 # Wait for data
-pika.asyncore_loop()
+asyncore_loop()
