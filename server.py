@@ -4,12 +4,12 @@ screenshot_queue server
 
 Runs the screenshot_queue consumer as a daemon.
 
-Usage
------
+Usage (xvfb optional)
+---------------------
 
-    python server.py start
-    python server.py stop
-    python server.py restart
+    xvfb-run --server-args='-screen 0,1024x768x24' python server.py start
+    xvfb-run --server-args='-screen 0,1024x768x24' python server.py stop
+    xvfb-run --server-args='-screen 0,1024x768x24' python server.py restart
 
 """
 
