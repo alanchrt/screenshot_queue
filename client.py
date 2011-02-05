@@ -12,7 +12,7 @@ from pika import (AsyncoreConnection, BasicProperties, ConnectionParameters,
 from settings import (RABBITMQ_HOST, RABBITMQ_USERNAME, RABBITMQ_PASSWORD,
                       RABBITMQ_QUEUE)
 
-class ScreenshotClient():
+class ScreenshotClient(object):
     """A client for screenshot queue messages."""
     def __init__(self):
         """Sets up the connection."""

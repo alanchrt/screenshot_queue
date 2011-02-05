@@ -14,7 +14,7 @@ from webkit2png import WebkitRenderer, init_qtgui
 from settings import (RABBITMQ_HOST, RABBITMQ_USERNAME, RABBITMQ_PASSWORD,
                       RABBITMQ_QUEUE, SCREENSHOT_ROOT)
 
-class ScreenshotConsumer():
+class ScreenshotConsumer(object):
     """A consumer for screenshot queue messages."""
     def __init__(self):
         # Initialize a QApplication
