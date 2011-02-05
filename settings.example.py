@@ -5,4 +5,4 @@ RABBITMQ_PASSWORD = ''
 RABBITMQ_QUEUE = 'screenshots'
 
 # The output directory for screenshots
-SCREENSHOT_ROOT = '/var/www/thumbs/'
+SCREENSHOT_ROOT = '/var/www/images/'
