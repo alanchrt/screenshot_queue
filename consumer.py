@@ -50,7 +50,7 @@ class ScreenshotConsumer():
         channel = connection.channel()
 
         # Declare the queue
-        channel.queue_declare(queue=RABBITMQ_QUEUE)
+        channel.queue_declare(queue=RABBITMQ_QUEUE, durable=True)
 
         # Subscribe to the queue
         channel.basic_consume(self._capture_screenshot, queue=RABBITMQ_QUEUE,

@@ -7,7 +7,8 @@ screenshot queue to generate screenshots.
 
 """
 
-from pika import AsyncoreConnection, ConnectionParameters, PlainCredentials
+from pika import (AsyncoreConnection, BasicProperties, ConnectionParameters,
+                  PlainCredentials)
 from settings import (RABBITMQ_HOST, RABBITMQ_USERNAME, RABBITMQ_PASSWORD,
                       RABBITMQ_QUEUE)
 
@@ -22,9 +23,11 @@ class ScreenshotClient():
         self.channel = connection.channel()
 
         # Declare the queue
-        self.channel.queue_declare(queue=RABBITMQ_QUEUE)
+        self.channel.queue_declare(queue=RABBITMQ_QUEUE, durable=True)
 
     def screenshot(self, filename, url):
         """Sends a screenshot request to the queue."""
         self.channel.basic_publish(exchange='', routing_key=RABBITMQ_QUEUE,
-                                   body='%s %s' % (filename, url))
+                                   properties=BasicProperties(
+                                   delivery_mode=2), body='%s %s' %
+                                   (filename, url))
