@@ -27,14 +27,6 @@ class ScreenshotConsumer():
         self.renderer.timeout = 10
         self.renderer.format = 'png'
 
-        # Prepare log file and pid file
-        open('/var/log/screenshot_queue.log', 'a')
-        self.stdin_path = '/var/log/screenshot_queue.log'
-        self.stdout_path = '/var/log/screenshot_queue.log'
-        self.stderr_path = '/var/log/screenshot_queue.log'
-        self.pidfile_path = '/var/run/screenshot_queue.pid'
-        self.pidfile_timeout = 10
-
     def _capture_screenshot(self, ch, method, properties, body):
         """Captures a website screenshot."""
         parameters = body.split()
