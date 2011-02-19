@@ -44,8 +44,8 @@ class ScreenshotConsumer(object):
         parameters = body.split()
         filename = parameters[0]
         pattern = re.compile(r'\w+\.\w+')
-        if pattern.match(filename):
-            path = os.path.join(self.screenshot_root, filename)
+        path = os.path.join(self.screenshot_root, filename)
+        if pattern.match(filename) and not os.path.exists(path):
             image = open(path, 'w')
             self.renderer.render_to_file(url=parameters[1], file=image)
             image.close()
