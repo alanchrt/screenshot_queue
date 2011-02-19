@@ -7,7 +7,7 @@ requests to generate website screenshots.
 
 """
 
-import os
+import os, re
 from pika import (AsyncoreConnection, ConnectionParameters, PlainCredentials,
                   asyncore_loop)
 from webkit2png import WebkitRenderer, init_qtgui
@@ -42,8 +42,10 @@ class ScreenshotConsumer(object):
     def _capture_screenshot(self, ch, method, properties, body):
         """Captures a website screenshot."""
         parameters = body.split()
-        path = os.path.join(self.screenshot_root, parameters[0])
-        if not os.path.exists(path):
+        filename = parameters[0]
+        pattern = re.compile(r'\w+\.\w+')
+        if pattern.match(filename):
+            path = os.path.join(self.screenshot_root, filename)
             image = open(path, 'w')
             self.renderer.render_to_file(url=parameters[1], file=image)
             image.close()
