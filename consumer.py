@@ -42,9 +42,11 @@ class ScreenshotConsumer(object):
     def _capture_screenshot(self, ch, method, properties, body):
         """Captures a website screenshot."""
         parameters = body.split()
-        image = open(os.path.join(self.screenshot_root, parameters[0]), 'w')
-        self.renderer.render_to_file(url=parameters[1], file=image)
-        image.close()
+        path = os.path.join(self.screenshot_root, parameters[0])
+        if not os.path.exists(path):
+            image = open(path, 'w')
+            self.renderer.render_to_file(url=parameters[1], file=image)
+            image.close()
 
     def run(self):
         # Open RabbitMQ connection
